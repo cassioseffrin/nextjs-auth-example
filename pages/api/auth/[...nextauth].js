@@ -26,7 +26,7 @@ export default NextAuth({
           password: credentials.password,
         };
 
-        const res = await fetch('http://192.168.50.40:3000/auth/oauth/token?Authorization=&grant_type=password&username=fabiano@arpainformatica.com.br&password=Arpa2010', {
+        const res = await fetch(`http://192.168.50.40:3000/auth/oauth/token?Authorization=&grant_type=password&username=${credentials.email}&password=${credentials.password}`, {
           method: 'POST',
           body: JSON.stringify(payload),
           headers: {
@@ -62,8 +62,8 @@ export default NextAuth({
       if (account && user) {
         return {
           ...token,
-          accessToken: user.data.token,
-          refreshToken: user.data.refreshToken,
+          accessToken: user.access_token,
+          refreshToken: user.refresh_token,
         };
       }
 

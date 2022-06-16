@@ -32,7 +32,7 @@ export default function Home() {
             }`}
             onClick={() => (session?.user?.accessToken ? signOut() : signIn())}
           >
-            {session?.user?.accessToken ? 'Sign Out' : 'Sign In'}
+            {session?.user?.accessToken ? 'Sair' : 'Logar'}
           </button>
         </div>
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">

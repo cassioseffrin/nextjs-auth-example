@@ -11,16 +11,16 @@ export default function SignIn({ csrfToken }) {
   return (
     <>
       <Formik
-        initialValues={{ email: '', password: '', tenantKey: '' }}
+        initialValues={{ email: 'fabiano@arpainformatica.com.br', password: 'Arpa2010', tenantKey: '12' }}
         validationSchema={Yup.object({
           email: Yup.string()
-            .max(30, 'Must be 30 characters or less')
-            .email('Invalid email address')
-            .required('Please enter your email'),
-          password: Yup.string().required('Please enter your password'),
+            .max(50, 'menos de 50 caracteres')
+            .email('email invalido')
+            .required('preencher o email'),
+          password: Yup.string().required('preencher a senha'),
           tenantKey: Yup.string()
-            .max(20, 'Must be 20 characters or less')
-            .required('Please enter your organization name'),
+            .max(20, 'maximo de 20 caracteres')
+            .required('preencher a empresa'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
           const res = await signIn('credentials', {
@@ -41,7 +41,7 @@ export default function SignIn({ csrfToken }) {
       >
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
-            <div className="bg-red-400 flex flex-col items-center justify-center min-h-screen py-2 shadow-lg">
+            <div className="bg-grey-400 flex flex-col items-center justify-center min-h-screen py-2 shadow-lg">
               <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <input
                   name="csrfToken"
@@ -60,8 +60,9 @@ export default function SignIn({ csrfToken }) {
                     Email
                     <Field
                       name="email"
-                      aria-label="enter your email"
+                      aria-label="email"
                       aria-required="true"
+                 
                       type="text"
                       className="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                     />
@@ -76,10 +77,11 @@ export default function SignIn({ csrfToken }) {
                     htmlFor="password"
                     className="uppercase text-sm text-gray-600 font-bold"
                   >
-                    password
+                    Senha
                     <Field
                       name="password"
-                      aria-label="enter your password"
+                      aria-label="digite a senha"
+          
                       aria-required="true"
                       type="password"
                       className="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
@@ -98,7 +100,8 @@ export default function SignIn({ csrfToken }) {
                     Tenant
                     <Field
                       name="tenantKey"
-                      aria-label="enter your Tenant"
+                      aria-label="Tenant"
+  
                       aria-required="true"
                       type="text"
                       className="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
@@ -114,7 +117,7 @@ export default function SignIn({ csrfToken }) {
                     type="submit"
                     className="uppercase text-sm font-bold tracking-wide bg-green-400 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:shadow-xl active:scale-90 transition duration-150"
                   >
-                    {formik.isSubmitting ? 'Please wait...' : 'Sign In'}
+                    {formik.isSubmitting ? 'logando...' : 'Entrar'}
                   </button>
                 </div>
               </div>
@@ -126,7 +129,7 @@ export default function SignIn({ csrfToken }) {
   );
 }
 
-// This is the recommended way for Next.js 9.3 or newer
+ 
 export async function getServerSideProps(context) {
   return {
     props: {
